@@ -28,7 +28,6 @@ MIMES = {
 EXTENSIONS = ['.jpg', '.csv']
 
 
-
 class pDrive():
     def __init__(self, directories, extensions=None, credentials=None,
                  no_web_auth_flags=False
@@ -84,6 +83,7 @@ class pDrive():
                 # todo: remove this
                 credentials = tools.run_flow(flow, store, flags)
             elif self.no_web_auth_flags:
+                print("working with no_web_auth")
                 credentials = tools.run_flow(flow, store, self.args)
             else:  # Needed only for compatibility with Python 2.6
                 credentials = tools.run(flow, store)
