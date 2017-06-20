@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from src import __author__, __version__, __license__
+from pDrive import __author__, __version__, __license__
 
 setup(
     name='pDrive',
