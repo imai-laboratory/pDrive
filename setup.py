@@ -11,5 +11,5 @@ setup(
     url='https://github.com/smatsumori/pDrive.git',
     keywords='python googledrive',
     packages=find_packages(),
-    install_requires=['google-api-python-client'],
+    install_requires=['google-api-python-client', 'python-gflags'],
 )

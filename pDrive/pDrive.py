@@ -9,6 +9,7 @@ from oauth2client import tools
 from oauth2client.file import Storage
 from googleapiclient.http import MediaFileUpload
 import glob
+import gflags
 from collections import namedtuple
 
 try:
@@ -29,8 +30,12 @@ EXTENSIONS = ['.jpg', '.csv']
 
 
 class pDrive():
-    def __init__(self, directories, extensions=None, credentials=None):
+    def __init__(self, directories, extensions=None, credentials=None,
+                 no_web_auth_flags=False
+                 ):
         self.directories = directories
+        if no_web_auth_flags:
+            gflags.FLAGS(['--noauth_local_webserver'])
         if not extensions:
             self.extensions = EXTENSIONS
             print('No extensions specified. using {}'.format(EXTENSIONS))
