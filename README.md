@@ -1,6 +1,9 @@
 # pDrive
 pDrive enables you to instantly upload your learned models to your google drive
 
+## Requirements
+- google-api-python-client
+
 ## Q & As
 #### I'll get `googleapiclient.errors.HttpError`
 Check your scope in google drive api. You can breifly check your settings by hitting
