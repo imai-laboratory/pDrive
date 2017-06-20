@@ -29,11 +29,14 @@ EXTENSIONS = ['.jpg', '.csv']
 
 
 class pDrive():
-    def __init__(self, directories, extensions=None):
+    def __init__(self, directories, extensions=None, credentials=None):
         self.directories = directories
         if not extensions:
             self.extensions = EXTENSIONS
             print('No extensions specified. using {}'.format(EXTENSIONS))
+
+        self.credentials = (CLIENT_SECRET_FILE if not credentials else
+                            credentials)
 
         self.file_paths = [os.path.join(d, '*' + e) for d in self.directories
                            for e in self.extensions]
@@ -67,7 +70,7 @@ class pDrive():
         credentials = store.get()
 
         if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+            flow = client.flow_from_clientsecrets(self.credentials, SCOPES)
             flow.user_agent = APPLICATION_NAME
 
             if flags:
