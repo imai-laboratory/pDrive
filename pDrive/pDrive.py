@@ -9,7 +9,6 @@ from oauth2client import tools
 from oauth2client.file import Storage
 from googleapiclient.http import MediaFileUpload
 import glob
-import gflags
 from collections import namedtuple
 
 try:
@@ -29,13 +28,16 @@ MIMES = {
 EXTENSIONS = ['.jpg', '.csv']
 
 
+
 class pDrive():
     def __init__(self, directories, extensions=None, credentials=None,
                  no_web_auth_flags=False
                  ):
         self.directories = directories
+        self.no_web_auth_flags = no_web_auth_flags
         if no_web_auth_flags:
-            gflags.FLAGS(['--noauth_local_webserver'])
+            self.args = tools.argparser.parse_args()
+            self.args.noauth_local_webserver = True
         if not extensions:
             self.extensions = EXTENSIONS
             print('No extensions specified. using {}'.format(EXTENSIONS))
@@ -79,7 +81,10 @@ class pDrive():
             flow.user_agent = APPLICATION_NAME
 
             if flags:
+                # todo: remove this
                 credentials = tools.run_flow(flow, store, flags)
+            elif self.no_web_auth_flags:
+                credentials = tools.run_flow(flow, store, self.args)
             else:  # Needed only for compatibility with Python 2.6
                 credentials = tools.run(flow, store)
             print('Storing credentials to ' + credential_path)
