@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from src import __author__, __version__, __license__
 
 setup(
-    name='pip_github_test',
+    name='pDrive',
     version=__version__,
     description='easy uploader for google drive',
     license=__license__,
