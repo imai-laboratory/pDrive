@@ -78,11 +78,12 @@ class pDrive():
         if not credentials or credentials.invalid:
             flow = client.flow_from_clientsecrets(self.credentials, SCOPES)
             flow.user_agent = APPLICATION_NAME
-
+            """
             if flags:
                 # todo: remove this
                 credentials = tools.run_flow(flow, store, flags)
-            elif self.no_web_auth_flags:
+            """
+            if self.no_web_auth_flags:
                 print("working with no_web_auth")
                 credentials = tools.run_flow(flow, store, self.args)
             else:  # Needed only for compatibility with Python 2.6
