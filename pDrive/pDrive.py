@@ -11,12 +11,6 @@ from googleapiclient.http import MediaFileUpload
 import glob
 from collections import namedtuple
 
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
-
 # SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
 SCOPES = 'https://www.googleapis.com/auth/drive'
 CLIENT_SECRET_FILE = '~/.credentials/client_secret.json'
@@ -78,11 +72,6 @@ class pDrive():
         if not credentials or credentials.invalid:
             flow = client.flow_from_clientsecrets(self.credentials, SCOPES)
             flow.user_agent = APPLICATION_NAME
-            """
-            if flags:
-                # todo: remove this
-                credentials = tools.run_flow(flow, store, flags)
-            """
             if self.no_web_auth_flags:
                 print("working with no_web_auth")
                 credentials = tools.run_flow(flow, store, self.args)
